@@ -1,0 +1,250 @@
+html,
+body {
+  background-color: #e9ecef;
+  height: 100%;   
+  width: 100%;
+ 
+    #root, .app, .login, .register, .verify {
+        height: 100%;
+    }
+
+    .media-list {
+        padding:0;
+    }
+
+    textarea {
+        margin-bottom: 20px;
+    }
+
+    .navbar-fixed{
+        position: fixed;
+        z-index: 10;
+        width: 100%;
+        border-bottom: 1px solid rgba(0,0,0,.125);
+    }
+
+    .modal {
+        padding-left: 0px;
+    }
+
+    #sendrate {
+        width: -webkit-fill-available;
+    }
+
+    .media-body .author {
+        display: block;
+        font-size: 1rem;
+        color: #000;
+        font-weight: 700;
+    }
+    .media-body .metadata {
+        display: block;
+        color: #777;
+        font-size: .8125rem;
+    }
+    .media-text {
+        margin-bottom: 0.25rem;
+    }
+    .title-comments {
+        font-size: 1.4rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+        color: rgba(0,0,0,.87);
+        margin-bottom: 1rem;
+        padding-bottom: .25rem;
+        border-bottom: 1px solid rgba(34,36,38,.15);
+    }
+    .media-left img {
+        width: 50px;
+    }
+    
+
+  height: -webkit-fill-available;
+
+    .modal-90w {
+        max-width: 80%;
+    }
+
+    .send {
+        display: block;
+        margin-bottom: 30px;
+    }
+
+    .accordion {
+        background-color: #f8f9fa!important;
+    }
+
+    .cardlist {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+
+  footer {
+      background-color: #f8f9fa!important;
+  }
+
+  nav {
+      a:not(.nav-link) {
+          font-weight: bolder;
+      }
+      button {
+          margin-left:  15px;
+      }
+  }
+
+  .card-header {
+      text-align: center;
+      button {
+        font-weight: bolder;
+        font-size: 2em;
+      }
+  }
+
+  .card {
+     
+      .card-title {
+          font-size: 2.5rem !important;
+      }
+      .btn {
+        font-size: 1.5em;
+        margin-bottom: 5px;
+        font-weight: bolder;
+        width: -webkit-fill-available;
+      }
+
+      .card-body {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+      }
+  }
+
+  .login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+        font-weight: bolder;
+        font-size: 3em;
+    }
+
+    label.form-label {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    button {
+        font-size: 1.5em;
+        font-weight: bold;
+        display: block;
+        margin: 10px auto;
+    }
+  }
+
+  .register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+
+    h1 {
+        font-weight: bolder;
+        font-size: 3em;
+    }
+
+    label.form-label {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    button {
+        font-size: 1.5em;
+        font-weight: bold;
+        display: block;
+        margin: 10px auto;
+    }
+  }
+  
+  .verify {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+
+    h1 {
+        font-weight: bolder;
+        font-size: 3em;
+    }
+
+    label.form-label {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    button {
+        font-size: 1.5em;
+        font-weight: bold;
+        display: block;
+        margin: 10px auto;
+    }
+  }
+}
+
+@media screen and (max-width: 720px) {
+    .btn-primary {
+        width: inherit !important;
+     }
+}
+
+@media screen and (min-width: 992px) {
+    .navbar-fixed {
+        position: initial !important;
+    }
+    .not-fixed {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 994px) {
+    .cardlist {
+        grid-template-columns: 1fr 1fr !important;
+    }
+  }
+  @media screen and (max-width: 421px) {
+    .login, .register, .verify {
+        margin: 5%;
+    }
+  }
+
+  @media screen and (max-width: 630px) {
+     .card-header {
+         button {
+            font-size: 1.5em !important; 
+         }
+         
+     }
+
+    
+     .btn-primary {
+        width: inherit !important;
+     }
+     .mr-auto {
+         text-align: center !important;
+     }
+     .form-inline {
+        flex-flow: initial;
+     }
+    .cardlist {
+        grid-template-columns: 1fr !important;
+    }
+    .modal {
+        padding-right: 0 !important;
+    }
+    .modal-90w {
+        max-width: 100% !important;
+    }
+  }
