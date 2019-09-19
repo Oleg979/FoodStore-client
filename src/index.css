@@ -20,6 +20,26 @@ body .media-list {
   padding: 0;
 }
 
+html .bottom,
+body .bottom {
+  position: relative;
+  bottom: 0;
+  width: -webkit-fill-available;
+}
+
+html .over,
+body .over {
+  text-shadow: 1px 0 1px #000,  0 1px 1px #000,  -1px 0 1px #000,  0 -1px 1px #000;
+}
+
+html #buyModal,
+body #buyModal {
+  font-size: 1.5em;
+  margin-bottom: 5px;
+  font-weight: bolder;
+  width: -webkit-fill-available;
+}
+
 html textarea,
 body textarea {
   margin-bottom: 20px;
@@ -261,6 +281,11 @@ body .verify button {
 @media screen and (max-width: 630px) {
   .card-header button {
     font-size: 1.5em !important;
+  }
+  #submit-order {
+    width: -webkit-fill-available;
+    display: block;
+    margin-bottom: 10px !important;
   }
   .btn-primary {
     width: inherit !important;

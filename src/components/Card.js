@@ -22,7 +22,7 @@ export default ({ setProductModalShow, incNumOfItems, title, price, desc, image,
                 theme: "default"
             };
         const mytoast = new Toastme(config);
-        incNumOfItems(price);
+        incNumOfItems(wholeItem);
         mytoast.success("Добавлено в корзину!");
     }
     return (

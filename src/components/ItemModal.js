@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Modal, Alert, Col, Button, Form, Row } from 'react-bootstrap'
+import { Toastme } from 'toastmejs'
 
-export default ({ show, setProductModalShow, item }) => {
-    let { title, image, price, rate, desc, type, numOfBuyers } = item;
+export default ({ show, setProductModalShow, item, incNumOfItems }) => {
+    let { title, image, price, rate, desc, type, numOfBuyers, numOfVoters } = item;
     let [comments, setComments] = useState([])
+    let [showRate, setShowRate] = useState(true)
+    let [newRate, setRate] = useState(rate)
+    let [voters, setVoters] = useState(numOfVoters);
+
     useEffect(() => {
         if (item == {}) return;
         fetch(`http://localhost:5000/comment/${item._id}`, {
@@ -15,10 +20,93 @@ export default ({ show, setProductModalShow, item }) => {
             .then(data => data.json())
             .then(comments => {
                 setComments(comments);
-                console.log(comments)
-            })
-    }, [item])
 
+
+            })
+    }, [show])
+
+    useEffect(() => {
+        if (item == {}) return;
+        fetch(`http://localhost:5000/item/isRated/${item._id}`, {
+            method: "GET",
+            headers: {
+                "x-access-token": localStorage.getItem("token")
+            }
+        })
+            .then(data => data.json())
+            .then(data => {
+                setShowRate(data.res)
+
+            })
+    }, [show])
+
+
+    const addToCart = () => {
+        const config = document.body.clientWidth <= 630 ? {
+            timeout: 2000,
+            positionY: "bottom",
+            positionX: "center",
+            distanceY: 20,
+            distanceX: 20,
+            zIndex: 10000,
+            theme: "default"
+        } : {
+                timeout: 2000,
+                positionY: "bottom",
+                positionX: "right",
+                distanceY: 20,
+                distanceX: 20,
+                zIndex: 10000,
+                theme: "default"
+            };
+        const mytoast = new Toastme(config);
+        incNumOfItems(item);
+        mytoast.success("Добавлено в корзину!");
+    }
+
+    const postRate = () => {
+        var numOfVoters = Number(item.numOfVoters);
+        var rate = Number(item.rate);
+        var amount = Number(document.getElementById("sendrate").innerText.split(" ")[2])
+        rate = (rate * numOfVoters + Number(amount)) / (numOfVoters + 1);
+        setRate(rate)
+        setVoters(voters + 1)
+        document.getElementById("numVote").innerText = `Средняя оценка ${numOfVoters + 1} покупателей:`;
+        fetch(`http://localhost:5000/item/rate/${item._id}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "x-access-token": localStorage.getItem("token")
+            },
+            body: JSON.stringify({
+                amount: Number(document.getElementById("sendrate").innerText.split(" ")[2])
+            })
+        })
+            .then(data => data.json())
+            .then(data => {
+                console.log(data)
+                const config = document.body.clientWidth <= 630 ? {
+                    timeout: 2000,
+                    positionY: "bottom",
+                    positionX: "center",
+                    distanceY: 20,
+                    distanceX: 20,
+                    zIndex: 10000,
+                    theme: "default"
+                } : {
+                        timeout: 2000,
+                        positionY: "bottom",
+                        positionX: "right",
+                        distanceY: 20,
+                        distanceX: 20,
+                        zIndex: 10000,
+                        theme: "default"
+                    };
+                const mytoast = new Toastme(config);
+                mytoast.success(`Вы оценили ${title} на ${Number(document.getElementById("sendrate").innerText.split(" ")[2])}`)
+                setShowRate(true)
+            })
+    }
 
     const send = () => {
         const date = new Date();
@@ -50,7 +138,7 @@ export default ({ show, setProductModalShow, item }) => {
         <Modal
             dialogClassName="modal-90w"
             show={show}
-            onHide={() => setProductModalShow(false)}
+            onHide={() => setProductModalShow(false, item)}
             aria-labelledby="example-modal-sizes-title-lg"
         >
             <Modal.Header closeButton>
@@ -80,13 +168,16 @@ export default ({ show, setProductModalShow, item }) => {
                                 Данный товар покупали <h1>{numOfBuyers} раз</h1>
                             </Alert>
                             <Alert variant="warning">
-                                Средняя оценка покупателей: <h1>{rate} из 5</h1>
+                                <span id="numVote">Средняя оценка {voters ? voters : numOfVoters} покупателей:</span> <h1>{newRate ? newRate.toFixed(1) : rate && rate.toFixed(1)} из 5</h1>
                             </Alert>
-                            <Alert variant="error">
+                            {!showRate && <> <Alert variant="error">
                                 <Form.Control id="rate" type="range" min="1" max="5" defaultValue="4" onChange={e => document.getElementById("sendrate").innerText = "Оценить на " + e.target.value} />
                             </Alert>
-                            <Button className="send" id="sendrate">Оценить на 4</Button>
-
+                                <Button className="send" id="sendrate" onClick={postRate}>Оценить на 4</Button></>}
+                            {showRate && <Alert variant="primary">
+                                Вы уже оценили этот товар
+  </Alert>}
+                            <Button variant="success" id="buyModal" onClick={addToCart}>Купить за {price}₽</Button>
                         </div>
 
                     </div>

@@ -15,7 +15,17 @@ export default class CardList extends Component {
 
 
 
-    setProductModalShow = (bool, item) => { this.setState({ productModalShow: bool, modalItem: item ? item : {} }) }
+    setProductModalShow = (bool, item) => {
+        this.setState({ productModalShow: bool, modalItem: item ? item : {} })
+        if (!bool) fetch(`http://localhost:5000/item`, {
+            method: "GET",
+        })
+            .then(data => data.json())
+            .then(items => {
+                this.setState({ items })
+                localStorage.setItem("items", JSON.stringify(items))
+            })
+    }
 
     noSearch = () => this.setState({ search: false, searchedItems: [] })
 
@@ -90,7 +100,7 @@ export default class CardList extends Component {
                     </div>
                     {}
                 </div>
-                <ItemModal show={this.state.productModalShow} setProductModalShow={this.setProductModalShow} item={this.state.modalItem} />
+                <ItemModal show={this.state.productModalShow} setProductModalShow={this.setProductModalShow} item={this.state.modalItem} incNumOfItems={this.props.incNumOfItems} />
             </>
         )
     }

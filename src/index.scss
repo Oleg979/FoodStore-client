@@ -12,6 +12,25 @@ body {
         padding:0;
     }
 
+    .bottom {
+        position: relative;
+        bottom: 0;
+        width: -webkit-fill-available;
+    }
+
+    .over {
+        text-shadow: 1px 0 1px #000, 
+0 1px 1px #000, 
+-1px 0 1px #000, 
+0 -1px 1px #000;
+    }
+
+    #buyModal {
+        font-size: 1.5em;
+    margin-bottom: 5px;
+    font-weight: bolder;
+    width: -webkit-fill-available;
+    }
     textarea {
         margin-bottom: 20px;
     }
@@ -26,6 +45,8 @@ body {
     .modal {
         padding-left: 0px;
     }
+
+    
 
     #sendrate {
         width: -webkit-fill-available;
@@ -228,8 +249,12 @@ body {
          
      }
 
-    
-     .btn-primary {
+    #submit-order {
+        width: -webkit-fill-available;
+    display: block;
+    margin-bottom: 10px !important;
+    }
+     .btn-primary, {
         width: inherit !important;
      }
      .mr-auto {
