@@ -130,8 +130,9 @@ export default ({ show, setProductModalShow, item, incNumOfItems }) => {
             })
         })
             .then(data => data.json())
-            .then(comments => {
-                console.log(comments)
+            .then(comment => {
+                console.log(comment)
+                setComments([...comments, comment])
             })
     }
     return (
@@ -198,12 +199,14 @@ export default ({ show, setProductModalShow, item, incNumOfItems }) => {
                                     <div class="media-body">
                                         <div class="media-heading">
                                             <div class="author">{comment.userName}</div>
+                                            <div>
+                                                <img src={comment.sentimentResult === undefined ? require("../assets/clock.png") : require("../assets/reaction-" + (comment.sentimentResult > 0 ? "happy" : comment.sentimentResult < 0 ? "sad" : "neutral") + ".svg")} width={40}/>
+                                            </div>
                                             <div class="metadata">
                                                 <span class="date">{comment.creationDate}</span>
                                             </div>
                                         </div>
                                         <div class="media-text text-justify">{comment.text}</div>
-
                                         <hr />
                                     </div>
                                 </li>

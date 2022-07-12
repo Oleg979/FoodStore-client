@@ -39,6 +39,7 @@ export default class CardList extends Component {
             items = items.filter(item => item.type == type);
         }
 
+
         this.setState({
             search: true,
             searchedItems: items

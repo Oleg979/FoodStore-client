@@ -6,6 +6,7 @@ import VerifyPage from './Verify'
 import CardList from './CardList';
 import Cart from './Cart'
 import Main from './Main'
+import {Toastme} from "toastmejs";
 
 export default class App extends Component {
   state = {
@@ -76,6 +77,40 @@ export default class App extends Component {
     localStorage.removeItem("cartPrice")
   }
 
+  submitOrder = () => {
+    console.log(this.state.cart);
+    fetch(`http://localhost:5000/order`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": localStorage.getItem("token")
+      },
+      body: JSON.stringify({
+        itemIds: Object.keys(this.state.cart).map(key => ({
+          id: key,
+          amount: this.state.cart[key]
+        })),
+        sum: this.state.cartPrice,
+        creationDate: new Date().toISOString()
+      })
+    })
+        .then(data => data.json())
+        .then(data => {
+          this.clearCart();
+          const config = {
+            timeout: 5000,
+            positionY: "bottom",
+            positionX: "right",
+            distanceY: 20,
+            distanceX: 20,
+            zIndex: 100,
+            theme: "default"
+          };
+          const mytoast = new Toastme(config);
+          mytoast.success("Заказ успешно оформлен! На почту отправлено письмо");
+        })
+  }
+
   logOut = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("name");
@@ -104,8 +139,8 @@ export default class App extends Component {
       {this.state.page === "verify" && <VerifyPage setPage={this.setPage} />}
       {this.state.page === "cart" && <>
         <Navbar logOut={this.logOut} cartPrice={this.state.cartPrice} setPage={this.setPage} />
-        <Cart cartPrice={this.state.cartPrice} items={JSON.parse(localStorage.getItem("items"))} amounts={this.state.cart} add={this.addToCart} remove={this.removeFromCart} clearCart={this.clearCart}/>
-       
+        <Cart cartPrice={this.state.cartPrice} items={JSON.parse(localStorage.getItem("items"))} amounts={this.state.cart} add={this.addToCart} remove={this.removeFromCart} clearCart={this.clearCart} submitOrder={this.submitOrder}/>
+
       </>}
       {this.state.page === "title" && <>
         <Navbar logOut={this.logOut} cartPrice={this.state.cartPrice} setPage={this.setPage} />

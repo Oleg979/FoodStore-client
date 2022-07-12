@@ -1,9 +1,9 @@
 html,
 body {
   background-color: #e9ecef;
-  height: 100%;   
+  height: 100%;
   width: 100%;
- 
+
     #root, .app, .login, .register, .verify {
         height: 100%;
     }
@@ -19,9 +19,9 @@ body {
     }
 
     .over {
-        text-shadow: 1px 0 1px #000, 
-0 1px 1px #000, 
--1px 0 1px #000, 
+        text-shadow: 1px 0 1px #000,
+0 1px 1px #000,
+-1px 0 1px #000,
 0 -1px 1px #000;
     }
 
@@ -46,7 +46,9 @@ body {
         padding-left: 0px;
     }
 
-    
+  .card-img-top {
+    min-height: 400px !important;
+  }
 
     #sendrate {
         width: -webkit-fill-available;
@@ -78,7 +80,7 @@ body {
     .media-left img {
         width: 50px;
     }
-    
+
 
   height: -webkit-fill-available;
 
@@ -122,7 +124,7 @@ body {
   }
 
   .card {
-     
+
       .card-title {
           font-size: 2.5rem !important;
       }
@@ -188,7 +190,7 @@ body {
         margin: 10px auto;
     }
   }
-  
+
   .verify {
     display: flex;
     flex-direction: column;
@@ -244,9 +246,9 @@ body {
   @media screen and (max-width: 630px) {
      .card-header {
          button {
-            font-size: 1.5em !important; 
+            font-size: 1.5em !important;
          }
-         
+
      }
 
     #submit-order {

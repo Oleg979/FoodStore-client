@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Table, Alert, Button } from 'react-bootstrap'
 
-export default ({ cartPrice, items, amounts, add, remove, clearCart }) => {
+export default ({ cartPrice, items, amounts, add, remove, clearCart, submitOrder }) => {
 
 
     return (
@@ -31,7 +31,7 @@ export default ({ cartPrice, items, amounts, add, remove, clearCart }) => {
             <Alert variant="primary">
                 Общая сумма заказа: <h1>{cartPrice}₽</h1>
             </Alert>
-            {Object.keys(amounts).length != 0 && <><Button variant={"success"} id="submit-order">Оформить заказ</Button> <Button variant={"danger"} id="submit-order" onClick={clearCart}>Очистить корзину</Button></>}
+            {Object.keys(amounts).length != 0 && <><Button variant={"success"} id="submit-order" onClick={submitOrder}>Оформить заказ</Button> <Button variant={"danger"} id="submit-order" onClick={clearCart}>Очистить корзину</Button></>}
         </div>
     )
 }
